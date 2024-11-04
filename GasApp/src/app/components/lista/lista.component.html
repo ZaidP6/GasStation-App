@@ -1,1 +1,15 @@
-<p>lista works!</p>
+@for (gasolinera of listaGasolineras; track gasolinera ){
+   <div>
+    <div>
+        <h3>{{gasolinera}}</h3>
+        <p>Gasolina 95: {{gasolinera.precioGasolina95}}</p>
+        <p>Gasóleo: {{gasolinera.precioGasoleoA}}</p>
+        <p>Hidrógeno: {{gasolinera.precioHidrogeno}} </p>
+        <p>C.P: {{gasolinera.cp}}</p>
+    </div>
+    <div>
+        <p>Dirección: {{gasolinera.Direccion}}</p>
+    </div>
+</div> 
+}
+
