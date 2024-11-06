@@ -3,21 +3,20 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ListaComponent } from './components/lista/lista.component';
-import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { GasListComponent } from './components/gas-list/gas-list.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 import { provideHttpClient } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		ListaComponent,
-		DropdownComponent,
-  NavbarComponent
+		GasListComponent,
+  		NavbarComponent
 	],
 	imports: [BrowserModule,
-		AppRoutingModule, BrowserAnimationsModule],
+		AppRoutingModule, BrowserAnimationsModule, NgbModule],
 	providers: [
 		provideClientHydration(),
 		provideHttpClient()
