@@ -11,9 +11,9 @@ export class GasListComponent implements OnInit {
   listadoGasolineras: Gasolinera[] = [];
   filteredGasolineras: Gasolinera[] = [];
   postalCodeFilter: string = '';
-  fuelTypeFilter: string = ''; 
-  minPriceFilter: number | null = null; 
-  maxPriceFilter: number | null = null; 
+  fuelTypeFilter: string = '';
+  minPriceFilter: number | null = null;
+  maxPriceFilter: number | null = null;
   totalGasolineras: number = 0;
 
 
@@ -25,7 +25,7 @@ export class GasListComponent implements OnInit {
     'Otras': false
   };
 
-  constructor(private gasService: GasService) {}
+  constructor(private gasService: GasService) { }
 
   ngOnInit() {
     this.gasService.getGasList().subscribe((respuesta) => {
@@ -93,7 +93,8 @@ export class GasListComponent implements OnInit {
 
   updateGasolinerasCount() {
     this.totalGasolineras = this.filteredGasolineras.length;
-    
+  }
+
   // Método para filtrar por código postal y marcas seleccionadas
   filterByPostalCode() {
     this.applyFilters();
@@ -112,7 +113,7 @@ export class GasListComponent implements OnInit {
 
       // Filtrado por marcas seleccionadas
       const matchesBrand = Object.keys(this.filterBrands).some(brand => {
-        return this.filterBrands[brand] && (brand === 'Otras' 
+        return this.filterBrands[brand] && (brand === 'Otras'
           ? !['REPSOL', 'CEPSA', 'CARREFOUR', 'BP'].includes(gasolinera.nombre)
           : gasolinera.nombre === brand);
       });
@@ -120,5 +121,5 @@ export class GasListComponent implements OnInit {
       return matchesPostalCode && matchesBrand;
     });
   }
-  
+
 }
