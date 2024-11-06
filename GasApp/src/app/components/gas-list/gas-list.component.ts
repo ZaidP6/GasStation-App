@@ -50,6 +50,15 @@ export class GasListComponent implements OnInit{
         if (key === 'C.P.') {
           gasolineraConNombresGuenos['cp'] = gasolineraChusquera[key];
         }
+        if (key === 'Dirección') {
+          gasolineraConNombresGuenos['direction'] = gasolineraChusquera[key];
+        }
+        if (key === 'Provincia') {
+          gasolineraConNombresGuenos['province'] = gasolineraChusquera[key];
+        }
+        if (key === 'Municipio') {
+          gasolineraConNombresGuenos['village'] = gasolineraChusquera[key];
+        }
         
       });
 
@@ -58,7 +67,10 @@ export class GasListComponent implements OnInit{
         gasolineraChusquera['Rótulo'],
         gasolineraChusquera['Precio Gasolina 95 E5'],
         gasolineraChusquera['Precio Gasoleo A'],
-        gasolineraChusquera['C.P.']
+        gasolineraChusquera['C.P.'],
+        gasolineraChusquera['Dirección'],
+        gasolineraChusquera['Provincia'],
+        gasolineraChusquera['Municipio']
       );
 
       newArray.push(gasolinera);
