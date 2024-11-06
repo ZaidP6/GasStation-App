@@ -3,22 +3,21 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ListaComponent } from './components/lista/lista.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { GasListComponent } from './components/gas-list/gas-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListaComponent
+    GasListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgModule
+    NgbModule
   ],
   providers: [
-    provideClientHydration(),
-    provideAnimationsAsync()
+    provideClientHydration()
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,18 @@
+@for(gasolinera of listadoGasolineras; track
+listadoGasolineras.indexOf(gasolinera)) {
+<div class="d-flex row gasolinera">
+    <div>
+        <p>{{gasolinera.nombre}}</p>
+    </div>
+    <div class="d-flex row">
+        <div class="d-flex column col-3">
+            <p>Gasolina 95</p>
+            <p>{{gasolinera.price95}}€/L</p>
+        </div>
+        <div class="d-flex column col-3">
+            <p>Diésel</p>
+            <p>{{gasolinera.priceDiesel}}€/L</p>
+        </div>
+    </div>
+</div>
+}

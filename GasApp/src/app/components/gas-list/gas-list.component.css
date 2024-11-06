@@ -1,0 +1,9 @@
+.gasolinera{
+    background-color: grey;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    margin: 30px 20px;
+    padding: 2%;
+    flex-wrap: wrap;
+}
