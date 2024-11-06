@@ -3,18 +3,25 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { GasListComponent } from './components/gas-list/gas-list.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { provideHttpClient } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [
-    provideClientHydration()
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		GasListComponent,
+  		NavbarComponent
+	],
+	imports: [BrowserModule,
+		AppRoutingModule, BrowserAnimationsModule, NgbModule],
+	providers: [
+		provideClientHydration(),
+		provideHttpClient()
+	],
+	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
