@@ -9,4 +9,7 @@ export class Gasolinera{
         public province: string,
         public village: string
     ) {}
+
+    // Esto permitir acceder a las propiedades dinámicamente
+  [key: string]: any;
 }

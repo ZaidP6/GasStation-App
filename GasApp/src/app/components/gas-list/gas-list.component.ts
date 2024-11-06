@@ -11,6 +11,10 @@ export class GasListComponent implements OnInit {
   listadoGasolineras: Gasolinera[] = [];
   filteredGasolineras: Gasolinera[] = [];
   postalCodeFilter: string = '';
+  fuelTypeFilter: string = ''; 
+  minPriceFilter: number | null = null; 
+  maxPriceFilter: number | null = null; 
+  totalGasolineras: number = 0;
 
 
   filterBrands: { [key: string]: boolean } = {
@@ -32,6 +36,7 @@ export class GasListComponent implements OnInit {
         let arrayGasolineras = parsedData['ListaEESSPrecio'];
         this.listadoGasolineras = this.cleanProperties(arrayGasolineras);
         this.filteredGasolineras = [...this.listadoGasolineras];
+        this.updateGasolinerasCount();
       } catch (error) {
         console.error('Error parsing JSON:', error);
       }
@@ -85,6 +90,10 @@ export class GasListComponent implements OnInit {
     return newArray;
   }
 
+
+  updateGasolinerasCount() {
+    this.totalGasolineras = this.filteredGasolineras.length;
+    
   // Método para filtrar por código postal y marcas seleccionadas
   filterByPostalCode() {
     this.applyFilters();
@@ -107,8 +116,9 @@ export class GasListComponent implements OnInit {
           ? !['REPSOL', 'CEPSA', 'CARREFOUR', 'BP'].includes(gasolinera.nombre)
           : gasolinera.nombre === brand);
       });
-
+      this.updateGasolinerasCount();
       return matchesPostalCode && matchesBrand;
     });
   }
+  
 }
