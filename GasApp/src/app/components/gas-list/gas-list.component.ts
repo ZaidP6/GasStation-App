@@ -11,6 +11,10 @@ export class GasListComponent implements OnInit {
   listadoGasolineras: Gasolinera[] = [];
   filteredGasolineras: Gasolinera[] = [];
   postalCodeFilter: string = '';
+  fuelTypeFilter: string = ''; 
+  minPriceFilter: number | null = null; 
+  maxPriceFilter: number | null = null; 
+  totalGasolineras: number = 0;
 
   constructor(private gasService: GasService) {}
 
@@ -22,7 +26,8 @@ export class GasListComponent implements OnInit {
         parsedData = JSON.parse(respuestaEnString);
         let arrayGasolineras = parsedData['ListaEESSPrecio'];
         this.listadoGasolineras = this.cleanProperties(arrayGasolineras);
-        this.filteredGasolineras = [...this.listadoGasolineras]; // Inicialmente no hay filtro
+        this.filteredGasolineras = [...this.listadoGasolineras];
+        this.updateGasolinerasCount();
       } catch (error) {
         console.error('Error parsing JSON:', error);
       }
@@ -77,10 +82,19 @@ export class GasListComponent implements OnInit {
     return newArray;
   }
 
+  
+
   // Método para filtrar por código postal
   filterByPostalCode() {
     this.filteredGasolineras = this.listadoGasolineras.filter((gasolinera) =>
       gasolinera.postalCode.includes(this.postalCodeFilter)
     );
+    this.updateGasolinerasCount();
   }
+
+  updateGasolinerasCount() {
+    this.totalGasolineras = this.filteredGasolineras.length;
+  }
+  
+
 }
