@@ -1,20 +1,37 @@
-<div id="separador"></div>
-@for(gasolinera of listadoGasolineras; track
-listadoGasolineras.indexOf(gasolinera)) {
-<div class="card text-center" style="width: 20%;">
+<!-- Filtro por código postal -->
+<div>
+    <label for="postalCode">Código Postal:</label>
+    <input 
+      id="postalCode" 
+      type="text" 
+      [(ngModel)]="postalCodeFilter" 
+      (input)="filterByPostalCode()" 
+      placeholder="Introduce el código postal">
+  </div>
+  
+  <!-- Mensaje de no resultados -->
+  <div *ngIf="filteredGasolineras.length === 0">
+    <p>No se encontraron gasolineras con ese código postal.</p>
+  </div>
+  
+  <div id="separador"></div>
+@for(gasolinera of filteredGasolineras; track gasolinera.id) {
+  <div class="card text-center" style="width: 20%;">
     <div class="card-body">
-        <div>
-            <h5>{{gasolinera.nombre}}</h5>
-        </div>
-        <div>
-            <p>Gasolina 95: {{gasolinera.price95}}€/L</p>
-        </div>
-        <div>
-            <p>Diésel: {{gasolinera.priceDiesel}}€/L</p>
-        </div>
-        <div>
-            <p>Código Postal: {{gasolinera.postalCode}}</p>
-        </div>
+      <div>
+        <h5>{{gasolinera.nombre}}</h5>
+      </div>
+      <div>
+        <p>Gasolina 95: {{gasolinera.price95}}€/L</p>
+      </div>
+      <div>
+        <p>Diésel: {{gasolinera.priceDiesel}}€/L</p>
+      </div>
+      <div>
+        <p>Código Postal: {{gasolinera.postalCode}}</p>
+      </div>
     </div>
-</div>
+  </div>
 }
+
+  
