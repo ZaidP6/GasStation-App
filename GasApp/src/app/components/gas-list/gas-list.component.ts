@@ -5,15 +5,16 @@ import { GasService } from '../../services/gas.service';
 @Component({
   selector: 'app-gas-list',
   templateUrl: './gas-list.component.html',
-  styleUrl: './gas-list.component.css'
+  styleUrls: ['./gas-list.component.css']  // Asegúrate de usar styleUrls en lugar de styleUrl
 })
-export class GasListComponent implements OnInit{
+export class GasListComponent implements OnInit {
+  listadoGasolineras: Gasolinera[] = [];
+  filteredGasolineras: Gasolinera[] = [];
+  postalCodeFilter: string = '';
 
-  listadoGasolineras:Gasolinera[] = [];
+  constructor(private gasService: GasService) {}
 
-  constructor(private gasService:GasService){}
-
-  ngOnInit(){
+  ngOnInit() {
     this.gasService.getGasList().subscribe((respuesta) => {
       const respuestaEnString = JSON.stringify(respuesta);
       let parsedData;
@@ -21,6 +22,7 @@ export class GasListComponent implements OnInit{
         parsedData = JSON.parse(respuestaEnString);
         let arrayGasolineras = parsedData['ListaEESSPrecio'];
         this.listadoGasolineras = this.cleanProperties(arrayGasolineras);
+        this.filteredGasolineras = [...this.listadoGasolineras]; // Inicialmente no hay filtro
       } catch (error) {
         console.error('Error parsing JSON:', error);
       }
@@ -31,10 +33,7 @@ export class GasListComponent implements OnInit{
     let newArray: Gasolinera[] = [];
     arrayGasolineras.forEach((gasolineraChusquera: any) => {
       const gasolineraConNombresGuenos: any = {};
-
-
       Object.keys(gasolineraChusquera).forEach((key) => {
-
         if (key === 'IDEESS') {
           gasolineraConNombresGuenos['id'] = gasolineraChusquera[key];
         }
@@ -78,4 +77,10 @@ export class GasListComponent implements OnInit{
     return newArray;
   }
 
+  // Método para filtrar por código postal
+  filterByPostalCode() {
+    this.filteredGasolineras = this.listadoGasolineras.filter((gasolinera) =>
+      gasolinera.postalCode.includes(this.postalCodeFilter)
+    );
+  }
 }

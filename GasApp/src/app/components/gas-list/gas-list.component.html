@@ -1,7 +1,22 @@
+<div>
+    <label for="postalCode">Código Postal:</label>
+    <input 
+      id="postalCode" 
+      type="text" 
+      [(ngModel)]="postalCodeFilter" 
+      (input)="filterByPostalCode()" 
+      placeholder="Introduce el código postal">
+  </div>
+  
+  <!-- Mensaje de no resultados -->
+  <div *ngIf="filteredGasolineras.length === 0">
+    <p>No se encontraron gasolineras con ese código postal.</p>
+  </div>
+  
 <div id="separador"></div>
+
 <div class="container d-flex flex-wrap justify-content-center">
-@for(gasolinera of listadoGasolineras; track
-listadoGasolineras.indexOf(gasolinera)) {
+@for(gasolinera of filteredGasolineras; track gasolinera.id) {
     <div class="big-card col-12 col-md-5 d-flex align-items-stretch">
         <div class="card text-center">
             <div class="card-header">
@@ -30,3 +45,4 @@ listadoGasolineras.indexOf(gasolinera)) {
     </div>
 }
 </div>
+

@@ -1,5 +1,13 @@
 # GasStation-App
 
+## Librerías
+```
+npm install
+```
+```
+ng add @ng-bootstrap/ng-bootstrap
+```
+
 ## Links
 [Diseño1](https://dribbble.com/shots/18772651-Petrol-Station-Finder)
 ![image](https://github.com/user-attachments/assets/c1a437d6-ea4d-4980-8908-bda3517aa69d)

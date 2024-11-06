@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { provideHttpClient } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -16,7 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   		NavbarComponent
 	],
 	imports: [BrowserModule,
-		AppRoutingModule, BrowserAnimationsModule, NgbModule],
+		AppRoutingModule, BrowserAnimationsModule, NgbModule, FormsModule],
 	providers: [
 		provideClientHydration(),
 		provideHttpClient()
