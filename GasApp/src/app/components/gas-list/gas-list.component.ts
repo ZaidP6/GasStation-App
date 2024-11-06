@@ -47,6 +47,9 @@ export class GasListComponent implements OnInit{
         if (key === 'Precio Gasoleo A') {
           gasolineraConNombresGuenos['priceDiesel'] = gasolineraChusquera[key];
         }
+        if (key === 'C.P.') {
+          gasolineraConNombresGuenos['cp'] = gasolineraChusquera[key];
+        }
         
       });
 
