@@ -1,48 +1,56 @@
 <div>
     <label for="postalCode">Código Postal:</label>
-    <input 
-      id="postalCode" 
-      type="text" 
-      [(ngModel)]="postalCodeFilter" 
-      (input)="filterByPostalCode()" 
+    <input
+      id="postalCode"
+      type="text"
+      [(ngModel)]="postalCodeFilter"
+      (input)="filterByPostalCode()"
       placeholder="Introduce el código postal">
+  </div>
+  
+  <!-- Filtro de marcas -->
+  <div>
+    <label for="brands">Selecciona marcas:</label>
+    <div *ngFor="let brand of ['REPSOL', 'CEPSA', 'CARREFOUR', 'BP', 'Otras']">
+      <input 
+        type="checkbox" 
+        [(ngModel)]="filterBrands[brand]" 
+        (change)="filterByBrands()"> 
+      {{ brand }}
+    </div>
   </div>
   
   <!-- Mensaje de no resultados -->
   <div *ngIf="filteredGasolineras.length === 0">
-    <p>No se encontraron gasolineras con ese código postal.</p>
+    <p>No se encontraron gasolineras con esos filtros.</p>
   </div>
   
-<div id="separador"></div>
-
-<div class="container d-flex flex-wrap justify-content-center">
-@for(gasolinera of filteredGasolineras; track gasolinera.id) {
-    <div class="big-card col-12 col-md-5 d-flex align-items-stretch">
-        <div class="card text-center">
-            <div class="card-header">
-                <h5>{{gasolinera.nombre}}</h5>
-            </div>
-            <div class="card-body d-flex justify-content-around">     
-                <div class="price-box">
-                    <p>Gasolina 95</p>
-                    <p>{{gasolinera.price95}}€/L</p>  
-                </div>
-                <div class="price-box">
-                    <p>Diésel</p>
-                    <p>{{gasolinera.priceDiesel}}€/L</p>
-                </div>
-                <div class="price-box">
-                    <p>Diésel</p>
-                    <p>{{gasolinera.priceDiesel}}€/L</p>
-                </div>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-                <p>{{gasolinera.direction}}</p>
-                <p>{{gasolinera.province}} / {{gasolinera.village}}</p>
-                <p>C.P. {{gasolinera.postalCode}}</p>
-            </div>
-        </div>
-    </div>
-}
-</div>
-
+  <div id="separador"></div>
+  
+  <div class="container d-flex flex-wrap justify-content-center">
+    @for(gasolinera of filteredGasolineras; track gasolinera.id) {
+      <div class="big-card col-12 col-md-5 d-flex align-items-stretch">
+          <div class="card text-center">
+              <div class="card-header">
+                  <h5>{{gasolinera.nombre}}</h5>
+              </div>
+              <div class="card-body d-flex justify-content-around">     
+                  <div class="price-box">
+                      <p>Gasolina 95</p>
+                      <p>{{gasolinera.price95}}€/L</p>  
+                  </div>
+                  <div class="price-box">
+                      <p>Diésel</p>
+                      <p>{{gasolinera.priceDiesel}}€/L</p>
+                  </div>
+              </div>
+              <div class="card-footer d-flex justify-content-between">
+                  <p>{{gasolinera.direction}}</p>
+                  <p>{{gasolinera.province}} / {{gasolinera.village}}</p>
+                  <p>C.P. {{gasolinera.postalCode}}</p>
+              </div>
+          </div>
+      </div>
+    }
+  </div>
+  
