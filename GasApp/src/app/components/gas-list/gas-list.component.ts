@@ -72,6 +72,13 @@ export class GasListComponent implements OnInit {
         if (key === 'Municipio') {
           gasolineraConNombresGuenos['village'] = gasolineraChusquera[key];
         }
+        if (key === 'Latitud') {
+          gasolineraConNombresGuenos['latitude'] = gasolineraChusquera[key];
+        }
+        if (key === 'Longitud (WGS84)') {
+          gasolineraConNombresGuenos['longitude'] = gasolineraChusquera[key];
+        }
+
       });
 
       let gasolinera = new Gasolinera(
@@ -82,7 +89,9 @@ export class GasListComponent implements OnInit {
         gasolineraChusquera['C.P.'],
         gasolineraChusquera['Dirección'],
         gasolineraChusquera['Provincia'],
-        gasolineraChusquera['Municipio']
+        gasolineraChusquera['Municipio'],
+        gasolineraChusquera['Latitud'],
+        gasolineraChusquera['Longitud (WGS84)']
       );
 
       newArray.push(gasolinera);
@@ -120,6 +129,10 @@ export class GasListComponent implements OnInit {
       this.updateGasolinerasCount();
       return matchesPostalCode && matchesBrand;
     });
+  }
+
+  replaceComas(texto: string) {
+    return texto.replace(',', '.');
   }
 
 }
