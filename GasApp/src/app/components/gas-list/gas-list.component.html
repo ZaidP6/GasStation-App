@@ -1,37 +1,39 @@
 
 <div class="d-flex w-100 justify-content-center">
-    <div class="mb-0 d-flex flex-row justify-content-around " style="border: 1px solid green; padding: 10px ; border-radius: 20px; box-shadow: 3px 3px 5px; width: 80% ">
-        <div class="d-flex align-items-center">
-            <label for="postalCode" class="h5">Código Postal:</label>
-            <input
-                id="postalCode"
-                type="text"
-                class="form-control form-control-lg"
-                [(ngModel)]="postalCodeFilter"
-                (input)="filterByPostalCode()"
-                placeholder="Introduce el código postal"
-                aria-label="Código Postal" style="width: 260px;">
-        </div>
+    <div class="mb-0 d-flex flex-row justify-content-around" style="border: 1px solid green; padding: 10px; border-radius: 20px; box-shadow: 3px 3px 5px; width: 80%;">
+      <div class="d-flex align-items-center">
+        <label for="postalCode" class="h5">Código Postal:</label>
+        <input
+          id="postalCode"
+          type="text"
+          class="form-control form-control-lg"
+          [(ngModel)]="postalCodeFilter"
+          (input)="filterByPostalCode()"
+          placeholder="Introduce el código postal"
+          aria-label="Código Postal"
+          style="width: 260px;">
+      </div>
+      <div>
+        <label style="font-size: 15pt;" for="brands">Selecciona las gasolineras:</label>
         <div>
-          <label style="font-size: 15pt;" for="brands">Selecciona marcas:</label>
-          <div *ngFor="let brand of ['REPSOL', 'CEPSA', 'CARREFOUR', 'BP', 'Otras']">
-           <input 
-             type="checkbox" 
-              [(ngModel)]="filterBrands[brand]" 
-              (change)="filterByBrands()"> 
-               {{ brand }}
-           </div>
+          <input type="checkbox" [(ngModel)]="selectAllBrands" (change)="toggleSelectAllBrands()">Seleccionar todas
         </div>
+        <div *ngFor="let brand of ['REPSOL', 'CEPSA', 'CARREFOUR', 'BP', 'Otras']">
+          <input type="checkbox" [(ngModel)]="filterBrands[brand]" (change)="filterByBrands()"> {{ brand }}
+        </div>
+      </div>
     </div>
-</div>
-
+  </div>
+  
 <!-- Mensaje de no resultados -->
 
 <div id="separador"></div>
-<div class="d-flex justify-content-center" *ngIf="filteredGasolineras.length === 0">
+<div class="d-flex justify-content-center"
+    *ngIf="filteredGasolineras.length === 0">
     <h4>No se encontraron gasolineras con esos filtros.</h4>
 </div>
-<div class="d-flex justify-content-center" *ngIf="filteredGasolineras.length > 0">
+<div class="d-flex justify-content-center"
+    *ngIf="filteredGasolineras.length > 0">
     <h5>Resultados: {{ totalGasolineras }} gasolineras encontradas</h5>
 </div>
 
@@ -40,7 +42,10 @@
     <div class="big-card col-12 col-md-5 d-flex align-items-stretch">
         <div class="card text-center">
             <div class="card-header">
-                <a href="http://maps.google.com/maps?saddr={{replaceComas(gasolinera.latitude)}},{{replaceComas(gasolinera.longitude)}}&daddr={{replaceComas(gasolinera.latitude)}},{{replaceComas(gasolinera.longitude)}}" target="_blank" class="enlace"><h5>{{gasolinera.nombre}}</h5></a>
+                <a
+                    href="http://maps.google.com/maps?saddr={{replaceComas(gasolinera.latitude)}},{{replaceComas(gasolinera.longitude)}}&daddr={{replaceComas(gasolinera.latitude)}},{{replaceComas(gasolinera.longitude)}}"
+                    target="_blank"
+                    class="enlace"><h5>{{gasolinera.nombre}}</h5></a>
             </div>
             <div class="card-body d-flex justify-content-around">
                 <div class="price-box">
@@ -65,4 +70,3 @@
     </div>
     }
 </div>
-

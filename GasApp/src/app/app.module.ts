@@ -9,12 +9,14 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { provideHttpClient } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { ComunityFilterComponent } from './components/comunity-filter/comunity-filter.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		GasListComponent,
-  		NavbarComponent
+  		NavbarComponent,
+    ComunityFilterComponent
 	],
 	imports: [BrowserModule,
 		AppRoutingModule, BrowserAnimationsModule, NgbModule, FormsModule],

@@ -24,6 +24,7 @@ export class GasListComponent implements OnInit {
     'BP': false,
     'Otras': false
   };
+  selectAllBrands:boolean =false;
 
   constructor(private gasService: GasService) { }
 
@@ -41,6 +42,14 @@ export class GasListComponent implements OnInit {
         console.error('Error parsing JSON:', error);
       }
     });
+  }
+
+  toggleSelectAllBrands() {
+    Object.keys(this.filterBrands).forEach((brand) => {
+      this.filterBrands[brand] = this.selectAllBrands;
+    });
+    this.applyFilters();
+    this.updateGasolinerasCount();
   }
 
   private cleanProperties(arrayGasolineras: any) {
@@ -107,11 +116,13 @@ export class GasListComponent implements OnInit {
   // Método para filtrar por código postal y marcas seleccionadas
   filterByPostalCode() {
     this.applyFilters();
+    this.updateGasolinerasCount();
   }
 
   // Método para filtrar por marcas seleccionadas
   filterByBrands() {
     this.applyFilters();
+    this.updateGasolinerasCount();
   }
 
   // Aplicar todos los filtros (código postal + marcas)
@@ -126,7 +137,6 @@ export class GasListComponent implements OnInit {
           ? !['REPSOL', 'CEPSA', 'CARREFOUR', 'BP'].includes(gasolinera.nombre)
           : gasolinera.nombre === brand);
       });
-      this.updateGasolinerasCount();
       return matchesPostalCode && matchesBrand;
     });
   }
