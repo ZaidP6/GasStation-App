@@ -7,9 +7,11 @@ export class Gasolinera{
         public postalCode: string,
         public direction: string,
         public province: string,
-        public village: string
+        public village: string,
+        public latitude: string,
+        public longitude: string
     ) {}
 
-    // Esto permitir acceder a las propiedades dinámicamente
+    // Esto permite acceder a las propiedades dinámicamente
   [key: string]: any;
 }
