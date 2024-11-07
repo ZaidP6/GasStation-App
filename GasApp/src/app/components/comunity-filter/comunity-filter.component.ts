@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
+import { ComunidadesService } from '../../services/comunidades.service';
+import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'app-comunity-filter',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrl: './comunity-filter.component.css'
 })
 export class ComunityFilterComponent {
+  @Output() comunidadSelect = new EventEmitter<string>();
+
+  comunidades: string[] = []; // Reemplazar con datos reales
+
+  onComunidadChange(comunidad: string): void {
+    this.comunidadSelect.emit(comunidad);
+  }
 
 }

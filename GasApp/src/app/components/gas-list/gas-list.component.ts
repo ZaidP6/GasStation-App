@@ -44,12 +44,10 @@ export class GasListComponent implements OnInit {
     });
   }
 
-  toggleSelectAllBrands() {
-    Object.keys(this.filterBrands).forEach((brand) => {
-      this.filterBrands[brand] = this.selectAllBrands;
-    });
-    this.applyFilters();
-    this.updateGasolinerasCount();
+  filterByComunidad(comunidad: string) {
+    this.filteredGasolineras = this.listadoGasolineras.filter(gasolinera => 
+      gasolinera['CCAA'] === comunidad
+    );
   }
 
   private cleanProperties(arrayGasolineras: any) {
@@ -125,9 +123,27 @@ export class GasListComponent implements OnInit {
     this.updateGasolinerasCount();
   }
 
+  FilterByComunidadSeleccionada(comunidad: string): void {
+    this.selectedComunidad = comunidad;
+    this.filterGasolineras();
+  }
+
+  FilterByProvinciaSeleccionada(provincia: string): void {
+    this.selectedProvincia = provincia;
+    this.filterGasolineras();
+  }
+
+  toggleSelectAllBrands() {
+    Object.keys(this.filterBrands).forEach((brand) => {
+      this.filterBrands[brand] = this.selectAllBrands;
+    });
+    this.applyFilters();
+    this.updateGasolinerasCount();
+  }
+
   // Aplicar todos los filtros (código postal + marcas)
   applyFilters() {
-    this.filteredGasolineras = this.listadoGasolineras.filter((gasolinera) => {
+    /* this.filteredGasolineras = this.listadoGasolineras.filter((gasolinera) => {
       // Filtrado por código postal
       const matchesPostalCode = this.postalCodeFilter ? gasolinera.postalCode.includes(this.postalCodeFilter) : true;
 
@@ -139,6 +155,16 @@ export class GasListComponent implements OnInit {
       });
       return matchesPostalCode && matchesBrand;
     });
+    */
+    this.filteredGasolineras = this.listadoGasolineras.filter(gasolinera => {
+      return (
+        (!this.postalCodeFilter || gasolinera.postalCode.includes(this.postalCodeFilter)) &&
+        (!this.selectedComunidad || gasolinera.comunidad === this.selectedComunidad) &&
+        (!this.selectedProvincia || gasolinera.province === this.selectedProvincia) &&
+        Object.keys(this.filterBrands).some(brand => this.filterBrands[brand] && gasolinera.brand === brand)
+      );
+    });
+    this.totalGasolineras = this.filteredGasolineras.length;
   }
 
   replaceComas(texto: string) {

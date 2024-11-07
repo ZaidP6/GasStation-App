@@ -1,0 +1,5 @@
+<label for="provincia">Seleccione Provincia:</label>
+<select [disabled]="!comunidadId" (change)="onProvinciaChange($event)">
+    <option value="">Seleccione una provincia</option>
+    <option *ngFor="let provincia of provincias" [value]="provincia.ID">{{ provincia.Nombre }}</option>
+  </select>

@@ -10,13 +10,15 @@ import { provideHttpClient } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ComunityFilterComponent } from './components/comunity-filter/comunity-filter.component';
+import { ProvinceFilterComponent } from './components/province-filter/province-filter.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		GasListComponent,
   		NavbarComponent,
-    ComunityFilterComponent
+    ComunityFilterComponent,
+    ProvinceFilterComponent
 	],
 	imports: [BrowserModule,
 		AppRoutingModule, BrowserAnimationsModule, NgbModule, FormsModule],

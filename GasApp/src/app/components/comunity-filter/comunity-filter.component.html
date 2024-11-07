@@ -1,1 +1,5 @@
-<p>comunity-filter works!</p>
+<label for="comunidad">Seleccione Comunidad Autónoma:</label>
+<select (change)="onComunidadChange($event)">
+    <option value="">Seleccione una comunidad</option>
+    <option *ngFor="let comunidad of comunidades" [value]="comunidad.ID">{{ comunidad.Nombre }}</option>
+  </select>
