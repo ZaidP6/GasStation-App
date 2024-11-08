@@ -1,0 +1,17 @@
+<div *ngIf="gasolineras.length > 0">
+    <div *ngFor="let gasolinera of paginatedGasolineras">
+      <p><strong>Nombre:</strong> {{ gasolinera.rotulo }}</p>
+      <p><strong>Dirección:</strong> {{ gasolinera.direccion }}</p>
+      <p><strong>Provincia:</strong> {{ gasolinera.provincia }}</p>
+      <p><strong>Código Postal:</strong> {{ gasolinera.codigopostal }}</p>
+      <hr>
+    </div>
+  
+    <!-- Controles de paginación -->
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+    <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= gasolineras.length">Siguiente</button>
+  </div>
+  <div *ngIf="gasolineras.length === 0">
+    <p>No hay gasolineras para mostrar.</p>
+  </div>
+  

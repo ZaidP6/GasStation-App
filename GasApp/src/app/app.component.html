@@ -1,7 +1,4 @@
-<!-- src/app/app.component.html -->
-<app-brand-filter (filterChange)="applyBrandFilter($event)"></app-brand-filter>
-<app-postal-code-autocomplete (filterChange)="applyPostalCodeFilter($event)"></app-postal-code-autocomplete>
-<app-region-province-filter (filterChange)="applyRegionProvinceFilter($event)"></app-region-province-filter>
-<app-fuel-type-filter (filterChange)="applyFuelTypeFilter($event)"></app-fuel-type-filter>
-<app-price-range-filter (filterChange)="applyPriceRangeFilter($event)"></app-price-range-filter>
-<app-gas-station-list></app-gas-station-list>
+<app-comunidad-filter (comunidadSelected)="selectedComunidad = $event"></app-comunidad-filter>
+<app-provincia-filter [comunidadId]="selectedComunidad ?? ''"></app-provincia-filter>
+<app-gasolinera-list [provinciaId]="selectedProvincia ?? ''"></app-gasolinera-list>
+

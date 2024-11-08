@@ -1,0 +1,6 @@
+<label for="provincia">Provincia</label>
+    <select id="provincia" (change)="onProvinciaSelect($event)">
+      <option *ngFor="let provincia of provincias" [value]="provincia.IDPovincia">
+        {{ provincia.Provincia }}
+      </option>
+    </select>

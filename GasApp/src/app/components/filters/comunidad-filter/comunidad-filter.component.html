@@ -1,0 +1,13 @@
+<div>
+  <label for="comunidad">Comunidad Autónoma:</label>
+  <select id="comunidad" [(ngModel)]="selectedComunidad" (change)="onProvinciaChange()">
+    <option *ngFor="let comunidad of comunidades" [value]="comunidad">{{ comunidad }}</option>
+  </select>
+</div>
+
+<div *ngIf="selectedComunidad">
+  <label for="provincia">Provincia:</label>
+  <select id="provincia" [(ngModel)]="selectedProvincia" (change)="onComunidadChange()">
+    <option *ngFor="let provincia of provincias" [value]="provincia">{{ provincia }}</option>
+  </select>
+</div>

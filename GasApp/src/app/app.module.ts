@@ -1,38 +1,27 @@
+// src/app/app.module.ts
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GasListComponent } from './components/gas-list/gas-list.component';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { provideHttpClient } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
-import { PostalCodeFilterComponent } from './components/postal-code-filter/postal-code-filter.component';
-import { CommunityFilterComponent } from './components/community-filter/community-filter.component';
-import { ProvinceFilterComponent } from './components/province-filter/province-filter.component';
-import { BrandFilterComponent } from './components/brand-filter/brand-filter.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ComunidadFilterComponent } from './components/filters/comunidad-filter/comunidad-filter.component';
+import { ProvinciaFilterComponent } from './components/filters/provincia-filter/provincia-filter.component';
+import { GasolineraListComponent } from './components/gasolinera-list/gasolinera-list.component';
+import { provideHttpClient } from '@angular/common/http'; // Agregar HttpClientModule
+import { GasolineraService } from './services/gasolinera.service';
+import { withFetch } from '@angular/common/http';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		GasListComponent,
-  		NavbarComponent,
-    PostalCodeFilterComponent,
-    CommunityFilterComponent,
-    ProvinceFilterComponent,
-    BrandFilterComponent
-	],
-	imports: [BrowserModule,
-		AppRoutingModule, BrowserAnimationsModule, NgbModule, FormsModule],
-	providers: [
-		provideClientHydration(),
-		provideHttpClient(),
-  provideAnimationsAsync()
-	],
-	bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    ComunidadFilterComponent,
+    ProvinciaFilterComponent,
+    GasolineraListComponent
+  ],
+  imports: [
+    BrowserModule,
+    NgbModule
+  ],
+  providers: [GasolineraService, provideHttpClient(withFetch())],
+  bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }
