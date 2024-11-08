@@ -7,6 +7,9 @@ npm install
 ```
 ng add @ng-bootstrap/ng-bootstrap
 ```
+```
+npm install json-server
+```
 
 ## Links
 [Diseño1](https://dribbble.com/shots/18772651-Petrol-Station-Finder)
