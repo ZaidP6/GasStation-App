@@ -25,6 +25,10 @@ export class GasListComponent implements OnInit {
     'Otras': false
   };
 
+  selectAllBrands: boolean = false;
+  selectedComunidad: string | null = null;
+  selectedProvincia: string | null = null;
+
   constructor(private gasService: GasService) { }
 
   ngOnInit() {
@@ -41,6 +45,23 @@ export class GasListComponent implements OnInit {
         console.error('Error parsing JSON:', error);
       }
     });
+  }
+
+  
+  filterByPostalCode(postalCode: string) {
+    this.postalCodeFilter = postalCode;
+    this.applyFilters();
+  }
+
+  filterByCommunity(comunidad: string) {
+    this.selectedComunidad = comunidad;
+    this.applyFilters();
+  }
+
+ 
+
+  filterByBrands() {
+    this.applyFilters();
   }
 
   private cleanProperties(arrayGasolineras: any) {
@@ -104,35 +125,54 @@ export class GasListComponent implements OnInit {
     this.totalGasolineras = this.filteredGasolineras.length;
   }
 
-  // Método para filtrar por código postal y marcas seleccionadas
-  filterByPostalCode() {
-    this.applyFilters();
-  }
 
-  // Método para filtrar por marcas seleccionadas
-  filterByBrands() {
-    this.applyFilters();
-  }
 
-  // Aplicar todos los filtros (código postal + marcas)
+  // Aplicar todos los filtros
   applyFilters() {
     this.filteredGasolineras = this.listadoGasolineras.filter((gasolinera) => {
-      // Filtrado por código postal
-      const matchesPostalCode = this.postalCodeFilter ? gasolinera.postalCode.includes(this.postalCodeFilter) : true;
-
-      // Filtrado por marcas seleccionadas
-      const matchesBrand = Object.keys(this.filterBrands).some(brand => {
-        return this.filterBrands[brand] && (brand === 'Otras'
-          ? !['REPSOL', 'CEPSA', 'CARREFOUR', 'BP'].includes(gasolinera.nombre)
-          : gasolinera.nombre === brand);
-      });
-      this.updateGasolinerasCount();
-      return matchesPostalCode && matchesBrand;
-    });
+      return (
+        (!this.postalCodeFilter || gasolinera.postalCode.includes(this.postalCodeFilter)) &&
+        (!this.selectedComunidad || gasolinera.province.includes(this.selectedComunidad)) &&
+        (!this.selectedProvincia || gasolinera.province === this.selectedProvincia) &&
+        Object.keys(this.filterBrands).some(brand => this.filterBrands[brand] && gasolinera.nombre === brand)
+    );
+  });
+  this.updateGasolinerasCount();
   }
 
   replaceComas(texto: string) {
     return texto.replace(',', '.');
   }
 
+  /**
+   * loadComunidades(): void {
+    this.gasolinerasService.getComunidades().subscribe(
+      data => this.comunidades = data,
+      error => console.error('Error loading comunidades', error)
+    );
+  }
+
+  loadProvincias(): void {
+    if (this.selectedComunidad) {
+      this.gasService.getProvincias(this.selectedComunidad).subscribe(
+        data => this.provincias = data,
+        error => console.error('Error loading provincias', error)
+      );
+    }
+  }
+*/
+  loadEstaciones(): void {
+    if (this.selectedProvincia) {
+      this.gasService.getGasolinerasPorProvincia(this.selectedProvincia).subscribe(
+        data => this.listadoGasolineras = data,
+        error => console.error('Error loading estaciones', error)
+      );
+    } else if (this.selectedComunidad) {
+      this.gasService.getGasolinerasPorComunidad(this.selectedComunidad).subscribe(
+        data => this.listadoGasolineras = data,
+        error => console.error('Error loading estaciones', error)
+      );
+    }
+  }
+   
 }

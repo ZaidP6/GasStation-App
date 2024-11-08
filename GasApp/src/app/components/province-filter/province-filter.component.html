@@ -1,0 +1,13 @@
+<div class="d-flex align-items-center">
+    <label for="provincia" class="h5">Provincia:</label>
+    <select
+      id="provincia"
+      class="form-control form-control-lg"
+      [(ngModel)]="selectedProvincia"
+      (change)="onProvinciaChange()"
+      [disabled]="!comunidad"
+      aria-label="Provincia">
+      <option value="">Selecciona una provincia</option>
+      <option *ngFor="let provincia of provincias" [value]="provincia">{{ provincia }}</option>
+    </select>
+  </div>
