@@ -7,6 +7,12 @@ npm install
 ```
 ng add @ng-bootstrap/ng-bootstrap
 ```
+```
+npm install json-server
+```
+```
+ng add @angular/material
+```
 ## Filtros
 ![image](https://github.com/user-attachments/assets/dea7fd74-4e1f-47b2-b5e9-e7c20be9554d)
 
