@@ -1,10 +1,19 @@
+// src/app/app.component.ts
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'GasApp';
+  selectedFilters: any = {};
+
+  applyBrandFilter(brands: string[]): void {
+    this.selectedFilters.brands = brands;
+  }
+
+  applyPostalCodeFilter(postalCode: string): void {
+    this.selectedFilters.postalCode = postalCode;
+  }
 }

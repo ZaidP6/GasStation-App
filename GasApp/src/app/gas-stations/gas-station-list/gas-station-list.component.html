@@ -1,0 +1,9 @@
+<!-- src/app/gas-stations/gas-station-list/gas-station-list.component.html -->
+<div *ngFor="let station of gasStations | slice: (currentPage-1)*pageSize : currentPage*pageSize">
+    <h3 (click)="openInMaps(station.direccion)">{{ station.rotulo }}</h3>
+    <p>{{ station.direccion }}, {{ station.provincia }}, {{ station.codigoPostal }}</p>
+  </div>
+  
+  <button (click)="currentPage = currentPage - 1" [disabled]="currentPage === 1">Previous</button>
+  <button (click)="currentPage = currentPage + 1">Next</button>
+  

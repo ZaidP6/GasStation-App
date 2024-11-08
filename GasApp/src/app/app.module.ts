@@ -13,6 +13,7 @@ import { PostalCodeFilterComponent } from './components/postal-code-filter/posta
 import { CommunityFilterComponent } from './components/community-filter/community-filter.component';
 import { ProvinceFilterComponent } from './components/province-filter/province-filter.component';
 import { BrandFilterComponent } from './components/brand-filter/brand-filter.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
 	declarations: [
@@ -28,7 +29,8 @@ import { BrandFilterComponent } from './components/brand-filter/brand-filter.com
 		AppRoutingModule, BrowserAnimationsModule, NgbModule, FormsModule],
 	providers: [
 		provideClientHydration(),
-		provideHttpClient()
+		provideHttpClient(),
+  provideAnimationsAsync()
 	],
 	bootstrap: [AppComponent]
 })
