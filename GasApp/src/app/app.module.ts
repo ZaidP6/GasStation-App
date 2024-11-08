@@ -9,6 +9,10 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { provideHttpClient } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -17,10 +21,11 @@ import { FormsModule } from '@angular/forms';
   		NavbarComponent
 	],
 	imports: [BrowserModule,
-		AppRoutingModule, BrowserAnimationsModule, NgbModule, FormsModule],
+		AppRoutingModule, BrowserAnimationsModule, NgbModule, FormsModule, MatAutocompleteModule, MatInputModule, ReactiveFormsModule],
 	providers: [
 		provideClientHydration(),
-		provideHttpClient()
+		provideHttpClient(),
+  provideAnimationsAsync()
 	],
 	bootstrap: [AppComponent]
 })
