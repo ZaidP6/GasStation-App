@@ -7,6 +7,9 @@ npm install
 ```
 ng add @ng-bootstrap/ng-bootstrap
 ```
+## Filtros
+![image](https://github.com/user-attachments/assets/dea7fd74-4e1f-47b2-b5e9-e7c20be9554d)
+
 
 ## Links
 [Diseño1](https://dribbble.com/shots/18772651-Petrol-Station-Finder)
