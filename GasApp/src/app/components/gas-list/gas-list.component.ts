@@ -11,12 +11,7 @@ export class GasListComponent implements OnInit {
   listadoGasolineras: Gasolinera[] = [];
   filteredGasolineras: Gasolinera[] = [];
   postalCodeFilter: string = '';
-  fuelTypeFilter: string = '';
-  minPriceFilter: number | null = null;
-  maxPriceFilter: number | null = null;
-  totalGasolineras: number = 0;
-
-
+  filteredPostalCodes: string[] = [];
   filterBrands: { [key: string]: boolean } = {
     'REPSOL': false,
     'CEPSA': false,
@@ -24,6 +19,7 @@ export class GasListComponent implements OnInit {
     'BP': false,
     'Otras': false
   };
+  totalGasolineras: number = 0;
 
   constructor(private gasService: GasService) { }
 
@@ -37,6 +33,7 @@ export class GasListComponent implements OnInit {
         this.listadoGasolineras = this.cleanProperties(arrayGasolineras);
         this.filteredGasolineras = [...this.listadoGasolineras];
         this.updateGasolinerasCount();
+        this.updatePostalCodes();
       } catch (error) {
         console.error('Error parsing JSON:', error);
       }
@@ -99,40 +96,54 @@ export class GasListComponent implements OnInit {
     return newArray;
   }
 
-
-  updateGasolinerasCount() {
-    this.totalGasolineras = this.filteredGasolineras.length;
+  // Filtrar los códigos postales según la entrada del usuario
+  filterPostalCodes() {
+    this.filteredPostalCodes = this.listadoGasolineras
+      .map(gasolinera => gasolinera.postalCode) // Obtener todos los códigos postales
+      .filter((code, index, self) => self.indexOf(code) === index) // Eliminar duplicados
+      .filter(code => code.includes(this.postalCodeFilter)); // Filtrar por el valor del input
+      
+    this.filterByPostalCode(); // Aplicar el filtro de código postal
   }
 
-  // Método para filtrar por código postal y marcas seleccionadas
+  // Método para actualizar los códigos postales disponibles
+  updatePostalCodes() {
+    this.filteredPostalCodes = this.listadoGasolineras
+      .map(gasolinera => gasolinera.postalCode)
+      .filter((code, index, self) => self.indexOf(code) === index); // Eliminar duplicados
+  }
+
+  // Filtrar gasolineras por código postal y marcas seleccionadas
   filterByPostalCode() {
     this.applyFilters();
+    this.updateGasolinerasCount();
   }
 
   // Método para filtrar por marcas seleccionadas
   filterByBrands() {
     this.applyFilters();
+    this.updateGasolinerasCount();
   }
 
   // Aplicar todos los filtros (código postal + marcas)
   applyFilters() {
     this.filteredGasolineras = this.listadoGasolineras.filter((gasolinera) => {
-      // Filtrado por código postal
       const matchesPostalCode = this.postalCodeFilter ? gasolinera.postalCode.includes(this.postalCodeFilter) : true;
-
-      // Filtrado por marcas seleccionadas
       const matchesBrand = Object.keys(this.filterBrands).some(brand => {
         return this.filterBrands[brand] && (brand === 'Otras'
           ? !['REPSOL', 'CEPSA', 'CARREFOUR', 'BP'].includes(gasolinera.nombre)
           : gasolinera.nombre === brand);
       });
-      this.updateGasolinerasCount();
       return matchesPostalCode && matchesBrand;
     });
+  }
+
+  // Actualizar el contador de gasolineras filtradas
+  updateGasolinerasCount() {
+    this.totalGasolineras = this.filteredGasolineras.length;
   }
 
   replaceComas(texto: string) {
     return texto.replace(',', '.');
   }
-
 }
