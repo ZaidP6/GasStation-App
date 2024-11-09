@@ -102,7 +102,7 @@ export class GasListComponent implements OnInit {
       .map(gasolinera => gasolinera.postalCode) // Obtener todos los códigos postales
       .filter((code, index, self) => self.indexOf(code) === index) // Eliminar duplicados
       .filter(code => code.includes(this.postalCodeFilter)); // Filtrar por el valor del input
-      
+
     this.filterByPostalCode(); // Aplicar el filtro de código postal
   }
 
@@ -145,5 +145,9 @@ export class GasListComponent implements OnInit {
 
   replaceComas(texto: string) {
     return texto.replace(',', '.');
+  }
+
+  filterByCCAA(nombre : string){
+
   }
 }
